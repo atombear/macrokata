@@ -6,6 +6,11 @@ fn print_result(num: i32) {
 
 // TODO: create `math!()` macro.
 
+macro_rules! math {
+    ($e:expr, plus, $a:expr) => {$e + $a};
+    (square $a:expr) => {$a * $a};
+}
+
 ////////// DO NOT CHANGE BELOW HERE /////////
 
 fn main() {

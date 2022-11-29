@@ -6,7 +6,13 @@ fn show_output() {
 ////////// DO NOT CHANGE ABOVE HERE /////////
 
 // TODO: create `show_output!()` macro.
-
+macro_rules! show_output {
+    // `()` indicates that the macro takes no argument.
+    () => {
+        // The macro will expand into the contents of this block.
+        show_output()
+    };
+}
 ////////// DO NOT CHANGE BELOW HERE /////////
 
 fn main() {

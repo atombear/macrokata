@@ -8,6 +8,17 @@ fn print_hashmap(hashmap: &HashMap<&str, &str>) {
 
 // TODO: create `hashmap!()` macro.
 
+// optional trailing comma with $(,)?
+macro_rules! hashmap {
+    ($($key:expr => $value:expr),*$(,)?) => {
+        {
+            let mut ret_dict = HashMap::new();
+            $(ret_dict.insert($key, $value));+;
+            ret_dict
+        }
+    }
+}
+
 ////////// DO NOT CHANGE BELOW HERE /////////
 
 fn main() {

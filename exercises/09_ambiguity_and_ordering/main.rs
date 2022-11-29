@@ -24,28 +24,33 @@ impl NumberType {
 
 // Sum together at least two expressions.
 macro_rules! sum {
-    ($($expr:expr),+ , $lastexpr:expr) => {
-        $($expr:expr + )+ $lastexpr
-    }
+    ($num:expr) => {$num};
+    ($first:expr, $($e:expr),+) => {
+        $first $(+($e))+
+    };
 }
 
 macro_rules! get_number_type {
-    ( $e:expr ) => {
-        NumberType::UnknownBecauseExpr($e)
+    ( -$negative:literal ) => {
+        NumberType::NegativeNumber(-$negative)
     };
-    ( $block:block ) => {
-        NumberType::UnknownBecauseBlock($block)
+    ( $positive:literal ) => {
+        NumberType::PositiveNumber($positive)
     };
     ( +$positive:literal ) => {
         NumberType::PositiveNumber($positive)
     };
-    ( -$negative:literal ) => {
-        NumberType::NegativeNumber($negative)
+    ( $block:block ) => {
+        NumberType::UnknownBecauseBlock($block)
+    };
+    ( $e:expr ) => {
+        NumberType::UnknownBecauseExpr($e)
     };
 }
 
 ////////// DO NOT CHANGE BELOW HERE /////////
 fn main() {
+
     // PositiveNumber
     get_number_type!(5).show();
 

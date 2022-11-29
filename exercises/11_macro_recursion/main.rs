@@ -1,5 +1,10 @@
 // TODO: Create the `curry!()` macro.
-
+macro_rules! curry {
+    (_, $body:block) => {$body};
+    (($val:ident: $t:ty) => $($rem:tt)*) => {
+        move |$val: $t| curry!($($rem)*)
+    };
+}
 ////////// DO NOT CHANGE BELOW HERE /////////
 
 fn print_numbers(nums: &Vec<i32>) {
@@ -11,6 +16,9 @@ fn get_example_vec() -> Vec<i32> {
 }
 
 fn main() {
+    let my_sum = curry!((x: i8) => (y: i8) => _, {x + y});
+    println!("{}", my_sum(3)(5));
+
     let is_between = curry!((min: i32) => (max: i32) => (item: &i32) => _, {
         min < *item && *item < max
     });

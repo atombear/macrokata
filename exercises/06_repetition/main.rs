@@ -6,6 +6,19 @@ fn print_success() {
 
 // TODO: create `if_any!()` macro.
 
+macro_rules! if_any {
+    ($($b:expr),+; $success_action:block) => {
+        if ($($b)||+) $success_action
+        // {
+        //     let mut bool_vec: Vec<bool> = vec![];
+        //     $(bool_vec.push($b));+;
+        //     if bool_vec.iter().fold(false, |x, y| x || *y) {
+        //         $success_action;
+        //     }
+        // }
+    }
+}
+
 ////////// DO NOT CHANGE BELOW HERE /////////
 
 fn main() {
